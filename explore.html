@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Explore Durrës</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/bundle.css" />
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+		<style>
+			#map {
+				width: 100%;
+				height: 320px;
+				border-radius: 6px;
+				margin: 1.2em 0;
+				z-index: 1;
+			}
+			.logo a {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				height: 100%;
+				color: inherit;
+				text-decoration: none;
+			}
+			.spot-cards {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1em;
+				margin-top: 1.5em;
+			}
+			.spot-card {
+				background: rgba(255,255,255,0.05);
+				border: 1px solid rgba(255,255,255,0.15);
+				border-radius: 6px;
+				padding: 1em 1.1em;
+			}
+			.spot-card h3 {
+				margin: 0 0 0.4em 0;
+				font-size: 0.95em;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				color: #fff;
+			}
+			.spot-card p {
+				margin: 0;
+				font-size: 0.82em;
+				line-height: 1.5;
+				opacity: 0.75;
+			}
+			.spot-card .tag {
+				display: inline-block;
+				font-size: 0.7em;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				opacity: 0.5;
+				margin-bottom: 0.4em;
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<header id="header">
+				<div class="logo">
+					<a href="index.html"><span class="icon solid fa-arrow-left"></span></a>
+				</div>
+				<div class="content">
+					<div class="inner">
+						<h1>Explore Durrës</h1>
+						<p>
+							A tourist map of Durrës — click any pin to learn more
+							about the city's top attractions.
+						</p>
+					</div>
+				</div>
+				<nav>
+					<ul>
+						<li><a href="#map-section">Map</a></li>
+					</ul>
+				</nav>
+			</header>
+
+			<div id="main">
+
+				<article id="map-section">
+					<h2 class="major">Tourist Map</h2>
+					<p>Durrës is one of Albania's oldest cities, sitting right on the Adriatic coast. Click any marker on the map for details, or browse the spots below.</p>
+
+					<div id="map"></div>
+					<p style="font-size:0.75em; opacity:0.5; margin-top:0.3em;">Map data © OpenStreetMap contributors</p>
+
+					<h3 style="margin-top:1.8em;">Top Spots</h3>
+
+					<div class="spot-cards">
+
+						<div class="spot-card">
+							<span class="tag">History</span>
+							<h3>Roman Amphitheatre</h3>
+							<p>Largest Roman amphitheatre in the Balkans. Built in the 2nd century AD, it held up to 20,000 spectators and features an early Christian chapel with original mosaics.</p>
+						</div>
+
+						<div class="spot-card">
+							<span class="tag">History</span>
+							<h3>Venetian Tower</h3>
+							<p>A 15th-century defensive tower built by the Venetians. Part of the ancient city walls that once protected Durrës from attacks coming from the Adriatic Sea.</p>
+						</div>
+
+						<div class="spot-card">
+							<span class="tag">Waterfront</span>
+							<h3>Vollga Boardwalk</h3>
+							<p>The iconic seaside promenade lined with palm trees, cafés, and restaurants. Best visited at sunset when locals and tourists gather along the Adriatic shore.</p>
+						</div>
+
+						<div class="spot-card">
+							<span class="tag">Culture</span>
+							<h3>Archaeological Museum</h3>
+							<p>One of the most important collections of Illyrian and Roman artifacts in the Balkans, spanning over 2,500 years of history. Located right next to the amphitheatre.</p>
+						</div>
+
+						<div class="spot-card">
+							<span class="tag">Nature</span>
+							<h3>Durrës Beach</h3>
+							<p>One of the longest beaches in Albania with clear Adriatic water. The northern end is lively in summer; walk south for quieter, less crowded stretches.</p>
+						</div>
+
+						<div class="spot-card">
+							<span class="tag">Travel</span>
+							<h3>Ferry Port</h3>
+							<p>Albania's main ferry port with connections to Bari and Ancona in Italy. A scenic and practical entry point if you're traveling from across the Adriatic.</p>
+						</div>
+
+					</div>
+				</article>
+
+			</div>
+
+			<footer id="footer"></footer>
+
+		</div>
+
+		<div id="bg"></div>
+
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+		<script src="assets/js/bundle.js"></script>
+		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+		<script>
+			setTimeout(function() {
+				var map = L.map('map').setView([41.3233, 19.4414], 14);
+
+				L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+					maxZoom: 19
+				}).addTo(map);
+
+				var spots = [
+					{ coords: [41.3253, 19.4394], name: "Roman Amphitheatre",     desc: "Largest Roman amphitheatre in the Balkans. Built 2nd century AD, held up to 20,000 spectators." },
+					{ coords: [41.3228, 19.4373], name: "Venetian Tower",          desc: "15th-century defensive tower built by the Venetians to protect the city from the Adriatic Sea." },
+					{ coords: [41.3190, 19.4480], name: "Vollga Boardwalk",        desc: "The iconic seaside promenade. Palm trees, cafés, and stunning Adriatic sunsets." },
+					{ coords: [41.3248, 19.4401], name: "Archaeological Museum",   desc: "Illyrian and Roman artifacts spanning 2,500 years of history, right next to the amphitheatre." },
+					{ coords: [41.3175, 19.4510], name: "Durrës Beach",            desc: "One of the longest beaches in Albania. Clear Adriatic water, great for swimming." },
+					{ coords: [41.3261, 19.4410], name: "Byzantine Forum",         desc: "Ruins of Byzantine-era basilicas and public buildings in the old city center." },
+					{ coords: [41.3310, 19.4560], name: "Ferry Port",              desc: "Main Albanian ferry port with connections to Bari and Ancona in Italy." }
+				];
+
+				spots.forEach(function(s) {
+					L.marker(s.coords)
+						.addTo(map)
+						.bindPopup('<strong>' + s.name + '</strong><br>' + s.desc);
+				});
+
+				map.invalidateSize();
+			}, 800);
+		</script>
+
+	</body>
+</html>
